@@ -67,19 +67,23 @@ export function Hero() {
             whileTap={{ scale: 0.95 }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <Button size="lg" className="gap-2">
-              <Play className="size-5" />
-              View My Work
-            </Button>
+            <a href="#portfolio">
+              <Button size="lg" className="gap-2">
+                <Play className="size-5" />
+                View My Work
+              </Button>
+            </a>
           </motion.div>
           <motion.div
             whileHover={{ scale: 1.05, rotateY: -5 }}
             whileTap={{ scale: 0.95 }}
             style={{ transformStyle: "preserve-3d" }}
           >
-            <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
-              Get In Touch
-            </Button>
+            <a href="#contact" >
+              <Button size="lg" variant="outline" className="bg-white/10 text-white border-white/20 hover:bg-white/20">
+                Get In Touch
+              </Button>
+            </a>
           </motion.div>
         </motion.div>
       </motion.div>

@@ -1,15 +1,45 @@
-import { Mail, MessageSquare, Send } from "lucide-react";
+import { useState } from "react";
+import { Mail, MessageSquare, Phone, Send, Loader2 } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
 import { Input } from "@/app/components/ui/input";
 import { Textarea } from "@/app/components/ui/textarea";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { motion } from "framer-motion";
 
+// ⬇️ PASTE YOUR GOOGLE APPS SCRIPT WEB APP URL HERE ⬇️
+const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbz23d0WTzoL4_bP9grki8Bf_z8ZsfLfBSMrbt_QQdKV7UXpRyKXESseWBe34OlwJL5HNg/exec";
+
 export function Contact() {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    project: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission would be handled here
-    alert("Thanks for your message! I'll get back to you soon.");
+    setStatus("loading");
+
+    try {
+      await fetch(GOOGLE_SHEETS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      setStatus("success");
+      setFormData({ name: "", email: "", project: "", message: "" });
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch {
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 4000);
+    }
   };
 
   return (
@@ -116,6 +146,8 @@ export function Contact() {
                       id="name"
                       placeholder="Your name"
                       required
+                      value={formData.name}
+                      onChange={handleChange}
                     />
                   </motion.div>
                   <motion.div
@@ -133,6 +165,8 @@ export function Contact() {
                       type="email"
                       placeholder="your@email.com"
                       required
+                      value={formData.email}
+                      onChange={handleChange}
                     />
                   </motion.div>
                 </div>
@@ -150,6 +184,8 @@ export function Contact() {
                   <Input
                     id="project"
                     placeholder="e.g., Commercial, Music Video, Documentary"
+                    value={formData.project}
+                    onChange={handleChange}
                   />
                 </motion.div>
 
@@ -168,6 +204,8 @@ export function Contact() {
                     placeholder="Tell me about your project..."
                     rows={6}
                     required
+                    value={formData.message}
+                    onChange={handleChange}
                   />
                 </motion.div>
 
@@ -179,9 +217,16 @@ export function Contact() {
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <Button type="submit" size="lg" className="w-full gap-2">
-                    <Send className="size-5" />
-                    Send Message
+                  <Button type="submit" size="lg" className="w-full gap-2" disabled={status === "loading"}>
+                    {status === "loading" ? (
+                      <><Loader2 className="size-5 animate-spin" /> Sending...</>
+                    ) : status === "success" ? (
+                      <>✅ Message Sent!</>
+                    ) : status === "error" ? (
+                      <>❌ Failed — Try Again</>
+                    ) : (
+                      <><Send className="size-5" /> Send Message</>
+                    )}
                   </Button>
                 </motion.div>
               </form>
@@ -195,13 +240,22 @@ export function Contact() {
               >
                 <p className="text-gray-600 mb-2">Or reach me directly at:</p>
                 <motion.a
-                  href="mailto:hello@videoeditor.com"
-                  className="inline-flex items-center gap-2 text-lg hover:underline"
+                  href="mailto:armangurung449@gmail.com"
+                  className="inline-flex items-center gap-2 text-lg text-gray-900 hover:underline"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Mail className="size-5" />
-                  hello@videoeditor.com
+                  armangurung449@gmail.com
+                </motion.a>
+                <motion.a
+                  href="tel:-918768682905"
+                  className="inline-flex items-center gap-2 text-lg text-gray-900 hover:underline mt-3"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Phone className="size-5" />
+                  +91 8768682905
                 </motion.a>
               </motion.div>
             </CardContent>
