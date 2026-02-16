@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Play, Film, Youtube } from "lucide-react";
+import { Play, Film } from "lucide-react";
 import { Badge } from "@/app/components/ui/badge";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
