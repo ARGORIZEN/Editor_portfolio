@@ -18,14 +18,17 @@ export function Hero() {
     <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden">
       <motion.div
         className="absolute inset-0 z-0"
-        style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1575320854760-bfffc3550640?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMGVkaXRpbmclMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzY5NjAyNDY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          y,
-          scale,
-        }}
+        style={{ y, scale, }}
       >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/image/portfloio/hero video.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-black/70"></div>
       </motion.div>
 

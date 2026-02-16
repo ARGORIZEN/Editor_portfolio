@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { Play, Film } from "lucide-react";
+import { Play, Film, Youtube } from "lucide-react";
 import { Badge } from "@/app/components/ui/badge";
 import { Card, CardContent } from "@/app/components/ui/card";
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
@@ -7,51 +7,57 @@ import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
 const projects = [
   {
     id: 1,
-    title: "Commercial Showcase",
-    category: "Commercial",
-    thumbnail: "https://images.unsplash.com/photo-1758788505807-fb5433f8f8b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBmaWxtbWFrZXIlMjBjYW1lcmF8ZW58MXx8fHwxNzY5NjY3NDA4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-    description: "High-end commercial video production with stunning visuals",
-    tags: ["Color Grading", "Motion Graphics", "Audio Mix"],
+    title: "Creative Content",
+    category: "Social Media",
+    thumbnail: "/image/portfloio/Flux2-Klein_00012_.png",
+    description: "Engaging social media content with dynamic editing",
+    tags: ["Fast Cuts", "Trending", "Vertical Format"],
+    youtubeUrl: "https://youtube.com/shorts/TflCUB4eECM?si=GY2qFg2uHvWKlcMf",
   },
   {
     id: 2,
     title: "Cinematic Short Film",
     category: "Film",
-    thumbnail: "https://images.unsplash.com/photo-1723396612574-961649793bb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaW5lbWF0aWMlMjBtb3ZpZSUyMHByb2R1Y3Rpb258ZW58MXx8fHwxNzY5NjA0MzAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    thumbnail: "/image/portfloio/Flux2-Klein_00018_.png",
     description: "Narrative storytelling with cinematic color grading",
     tags: ["Narrative", "Sound Design", "VFX"],
+    youtubeUrl: "https://youtube.com/shorts/ZwtqdhTpoLQ?si=K52hWqe_KorSVGDM",
   },
   {
     id: 3,
     title: "Creative Content",
     category: "Social Media",
-    thumbnail: "https://images.unsplash.com/photo-1760723986612-f12e9e9855a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMHZpZGVvJTIwcHJvamVjdHxlbnwxfHx8fDE3Njk2Njc0MDl8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    thumbnail: "/image/portfloio/Flux2-Klein_00015_.png",
     description: "Engaging social media content with dynamic editing",
     tags: ["Fast Cuts", "Trending", "Vertical Format"],
+    youtubeUrl: "https://youtube.com/shorts/ZhxHA_jRkPM?si=hOSOUPJnmbAinWP6",
   },
   {
     id: 4,
-    title: "Documentary Edit",
-    category: "Documentary",
-    thumbnail: "https://images.unsplash.com/photo-1575320854760-bfffc3550640?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx2aWRlbyUyMGVkaXRpbmclMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzY5NjAyNDY2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Explanatory Edit",
+    category: "Social Media",
+    thumbnail: "/image/portfloio/Flux2-Klein_00020_.png",
     description: "Thoughtful documentary storytelling with interview sequences",
-    tags: ["Documentary", "Interviews", "Archival"],
+    tags: ["Vertical Format", "Trending", "Fast Cuts"],
+    youtubeUrl: "https://youtube.com/shorts/haP8gWDGMWc?si=LzLiUCY-4Htkm1kU",
   },
   {
     id: 5,
-    title: "Music Video",
-    category: "Music",
-    thumbnail: "https://images.unsplash.com/photo-1758788505807-fb5433f8f8b6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwcm9mZXNzaW9uYWwlMjBmaWxtbWFrZXIlMjBjYW1lcmF8ZW58MXx8fHwxNzY5NjY3NDA4fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    title: "Explanatory Edit",
+    category: "Social Media",
+    thumbnail: "/image/portfloio/Flux2-Klein_00021_.png",
     description: "Rhythm-driven editing with creative visual effects",
-    tags: ["Music Video", "Effects", "Beat Sync"],
+    tags: ["Vertical Format", "Trending", "Fast Cuts"],
+    youtubeUrl: "https://youtube.com/shorts/DhhDE7metg4?si=Rk_xqcIsdqn4qeco",
   },
   {
     id: 6,
     title: "Brand Story",
     category: "Commercial",
-    thumbnail: "https://images.unsplash.com/photo-1723396612574-961649793bb9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaW5lbWF0aWMlMjBtb3ZpZSUyMHByb2R1Y3Rpb258ZW58MXx8fHwxNzY5NjA0MzAyfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    thumbnail: " /image/portfloio/Flux2-Klein_00016_.png",
     description: "Corporate brand story with emotional narrative",
     tags: ["Corporate", "Branding", "Testimonials"],
+    youtubeUrl: "https://youtube.com/shorts/GnDTb_TvGto?si=wjkgSdzpzFC7zFL7",
   },
 ];
 
@@ -61,7 +67,7 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
   const cardRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  
+
   const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
     stiffness: 300,
     damping: 30
@@ -102,17 +108,18 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
       }}
       whileHover={{ z: 50 }}
     >
-      <Card className="group cursor-pointer overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-shadow">
-        <div className="relative aspect-video overflow-hidden">
-          <motion.img 
-            src={project.thumbnail} 
+      <a href={project.youtubeUrl}
+        target="_blank" rel="noopener noreferrer">
+        <Card className="group cursor-pointer overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-shadow h-full relative aspect-[9/16]">
+          <motion.img
+            src={project.thumbnail}
             alt={project.title}
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.4 }}
             style={{ transformStyle: "preserve-3d" }}
           />
-          <motion.div 
+          <motion.div
             className="absolute inset-0 bg-black/50 flex items-center justify-center"
             initial={{ opacity: 0 }}
             whileHover={{ opacity: 1 }}
@@ -126,22 +133,22 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
               <Play className="size-8 text-gray-900" />
             </motion.div>
           </motion.div>
-        </div>
-        <CardContent className="p-6" style={{ transform: "translateZ(50px)" }}>
-          <div className="flex items-center justify-between mb-2">
-            <h3 className="text-xl">{project.title}</h3>
-            <Badge variant="secondary">{project.category}</Badge>
-          </div>
-          <p className="text-gray-600 mb-4">{project.description}</p>
-          <div className="flex flex-wrap gap-2">
-            {project.tags.map((tag) => (
-              <Badge key={tag} variant="outline" className="text-xs">
-                {tag}
-              </Badge>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+          <CardContent className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/80 to-transparent text-white">
+            <div className="flex items-center justify-between mb-0">
+              <h3 className="text-lg leading-tight">{project.title}</h3>
+              <Badge variant="secondary">{project.category}</Badge>
+            </div>
+            <p className="text-gray-300 text-sm mb-2">{project.description}</p>
+            <div className="flex flex-wrap gap-1">
+              {project.tags.map((tag) => (
+                <Badge key={tag} variant="outline" className="text-xs text-white border-white/50">
+                  {tag}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </a>
     </motion.div>
   );
 }
@@ -149,21 +156,21 @@ function ProjectCard({ project, index }: { project: typeof projects[0], index: n
 export function Portfolio() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const filteredProjects = selectedCategory === "All" 
-    ? projects 
+  const filteredProjects = selectedCategory === "All"
+    ? projects
     : projects.filter(p => p.category === selectedCategory);
 
   return (
     <section className="py-20 px-4 bg-gray-50" id="portfolio" style={{ transformStyle: "preserve-3d" }}>
       <div className="max-w-7xl mx-auto">
-        <motion.div 
+        <motion.div
           className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <motion.div 
+          <motion.div
             className="flex items-center justify-center gap-2 mb-4"
             animate={{ rotateY: [0, 360] }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
@@ -177,7 +184,7 @@ export function Portfolio() {
           </p>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="flex gap-2 flex-wrap justify-center mb-12"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -196,7 +203,7 @@ export function Portfolio() {
             >
               <Badge
                 variant={selectedCategory === category ? "default" : "outline"}
-                className="cursor-pointer px-4 py-2 text-sm"
+                className="cursor-pointer px-4 py-2 text-sm text-gray-800"
                 onClick={() => setSelectedCategory(category)}
               >
                 {category}
