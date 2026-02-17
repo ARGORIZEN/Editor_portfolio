@@ -39,7 +39,7 @@ const projects = [
     thumbnail: "/image/portfloio/Flux2-Klein_00020_.png",
     description: "Thoughtful documentary storytelling with interview sequences",
     tags: ["Vertical Format", "Trending", "Fast Cuts"],
-    youtubeUrl: "https://youtube.com/shorts/haP8gWDGMWc?si=LzLiUCY-4Htkm1kU",
+    youtubeUrl: "https://youtube.com/shorts/iqvZoW8qTgU?si=tk188rUm1FpW506Q",
   },
   {
     id: 5,
@@ -57,7 +57,7 @@ const projects = [
     thumbnail: " /image/portfloio/Flux2-Klein_00016_.png",
     description: "Corporate brand story with emotional narrative",
     tags: ["Corporate", "Branding", "Testimonials"],
-    youtubeUrl: "https://youtube.com/shorts/GnDTb_TvGto?si=wjkgSdzpzFC7zFL7",
+    youtubeUrl: "https://youtube.com/shorts/A9bkgckx78k?si=5YZhSlF06hSELjSq",
   },
 ];
 
